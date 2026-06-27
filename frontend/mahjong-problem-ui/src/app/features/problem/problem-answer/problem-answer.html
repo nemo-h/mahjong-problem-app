@@ -1,0 +1,16 @@
+<h2>回答</h2>
+
+<p>デバッグ: {{ answer() | json }}</p>
+
+<div *ngIf="answer() as a">
+  <p><strong>正解牌:</strong> {{ a.answerTile }}</p>
+  <p><strong>解説:</strong> {{ a.explanation }}</p>
+
+  <p>
+    <a [routerLink]="['/problems', problemId()]">問題詳細へ戻る</a>
+  </p>
+
+  <p>
+    <a [routerLink]="['/problems']">一覧へ戻る</a>
+  </p>
+</div>

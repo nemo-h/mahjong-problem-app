@@ -1,0 +1,32 @@
+<div *ngIf="problem() as p">
+  <p><strong>ID:</strong> {{ p.id }}</p>
+  <p><strong>問題文:</strong> {{ p.questionText }}</p>
+  <p><strong>作成日時:</strong> {{ p.createdAt }}</p>
+
+  <p><strong>手牌</strong></p>
+
+
+<!-- 牌画像表示 -->
+<div class="tile-row">
+  <img
+    *ngFor="let tile of p.tehai"
+    [src]="'assets/tiles/' + tile + '.png'"
+    [alt]="tile"
+    class="tile-image"
+  >
+</div>
+
+
+
+  <p>
+    <a [routerLink]="['/problems', p.id, 'answer']">回答を見る</a>
+  </p>
+
+  <button type="button" (click)="deleteProblem()">
+    削除
+  </button>
+
+  <p>
+    <a [routerLink]="['/problems']">一覧へ戻る</a>
+  </p>
+</div>

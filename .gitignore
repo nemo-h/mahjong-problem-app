@@ -1,0 +1,21 @@
+# Java / Gradle
+backend/demo/build/
+backend/demo/.gradle/
+
+# Angular / Node
+frontend/mahjong-problem-ui/node_modules/
+frontend/mahjong-problem-ui/dist/
+frontend/mahjong-problem-ui/.angular/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# H2 DB files
+backend//demo/data/
+*.mv.db
+*.trace.db

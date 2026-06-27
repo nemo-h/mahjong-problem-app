@@ -1,0 +1,39 @@
+<h2>問題登録</h2>
+
+<div *ngIf="errorMessage()" style="color: red;">
+  {{ errorMessage() }}
+</div>
+
+<div>
+  <label>問題文</label><br>
+  <input type="text" [(ngModel)]="questionText">
+</div>
+
+<br>
+
+<div>
+  <label>手牌</label><br>
+  <input type="text" [(ngModel)]="tehaiText" placeholder="1m,2m,3m">
+</div>
+
+<br>
+
+<div>
+  <label>正解牌</label><br>
+  <input type="text" [(ngModel)]="answerTile" placeholder="1m">
+</div>
+
+<br>
+
+<div>
+  <label>解説</label><br>
+  <textarea [(ngModel)]="explanation"></textarea>
+</div>
+
+<br>
+
+<button type="button" (click)="createProblem()">登録</button>
+
+<p>
+  <a [routerLink]="['/problems']">一覧へ戻る</a>
+</p>

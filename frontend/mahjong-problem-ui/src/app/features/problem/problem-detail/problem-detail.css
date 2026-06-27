@@ -1,0 +1,11 @@
+.tile-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.tile-image {
+  width: 40px;
+  height: auto;
+}

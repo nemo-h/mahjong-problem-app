@@ -1,0 +1,13 @@
+<h2>問題一覧</h2>
+
+<p>
+  <a [routerLink]="['/problems/new']">新規登録</a>
+</p>
+
+<ul>
+  <li *ngFor="let p of problems()">
+    <a [routerLink]="['/problems', p.id]">
+      {{ p.id }} - {{ p.questionText }} - {{ p.createdAt }}
+    </a>
+  </li>
+</ul>
