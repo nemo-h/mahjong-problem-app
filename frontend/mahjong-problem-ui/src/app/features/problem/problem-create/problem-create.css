@@ -1,0 +1,54 @@
+.tile-palette-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.tile-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.tile-image {
+  width: 40px;
+  height: auto;
+  display: block;
+}
+
+.tehai-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.tehai-chip {
+  position: relative;
+}
+
+.tehai-chip .tile-image {
+  cursor: pointer;
+}
+
+.tile-selected-answer {
+  outline: 3px solid #d32f2f;
+  border-radius: 2px;
+}
+
+.tehai-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  line-height: 14px;
+  padding: 0;
+  border: 1px solid #999;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  font-size: 10px;
+}

@@ -12,15 +12,35 @@
 <br>
 
 <div>
-  <label>手牌</label><br>
-  <input type="text" [(ngModel)]="tehaiText" placeholder="1m,2m,3m">
+  <label>牌を選択</label>
+  <div *ngFor="let group of tileGroups" class="tile-palette-row">
+    <button
+      type="button"
+      *ngFor="let code of group.tiles"
+      class="tile-btn"
+      (click)="addTile(code)"
+    >
+      <img [src]="'assets/tiles/' + code + '.png'" [alt]="code" class="tile-image">
+    </button>
+  </div>
 </div>
 
 <br>
 
 <div>
-  <label>正解牌</label><br>
-  <input type="text" [(ngModel)]="answerTile" placeholder="1m">
+  <label>手牌（クリックで正解牌を指定）</label>
+  <div class="tehai-row">
+    <div *ngFor="let code of tehai; let i = index" class="tehai-chip">
+      <img
+        [src]="'assets/tiles/' + code + '.png'"
+        [alt]="code"
+        class="tile-image"
+        [class.tile-selected-answer]="answerTile === code"
+        (click)="selectAnswer(i)"
+      >
+      <button type="button" class="tehai-remove" (click)="removeTile(i)">×</button>
+    </div>
+  </div>
 </div>
 
 <br>
