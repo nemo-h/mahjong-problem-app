@@ -15,6 +15,16 @@ export class ProblemAnswerComponent implements OnInit {
   answer = signal<any | null>(null);
   problemId = signal<number | null>(null);
 
+  explanationParts(text: string): { type: 'text' | 'tile'; value: string }[] {
+    return text
+      .split(/([0-9][mpsz])/g)
+      .filter(part => part.length > 0)
+      .map(part => ({
+        type: /^[0-9][mpsz]$/.test(part) ? 'tile' : 'text',
+        value: part
+      } as { type: 'text' | 'tile'; value: string }));
+  }
+
   constructor(
     private route: ActivatedRoute,
     private problemService: ProblemService
