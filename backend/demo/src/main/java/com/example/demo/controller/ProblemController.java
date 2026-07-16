@@ -51,12 +51,13 @@ public class ProblemController {
 
         List<String> tehai = objectMapper.readValue(p.getTehaiJson(), List.class);
 
-        return Map.of(
-                "id", p.getId(),
-                "questionText", p.getQuestionText(),
-                "tehai", tehai,
-                "createdAt", p.getCreatedAt()
-        );
+        Map<String, Object> result = new HashMap<>();
+        result.put("id", p.getId());
+        result.put("questionText", p.getQuestionText());
+        result.put("tehai", tehai);
+        result.put("doraTile", p.getDoraTile());
+        result.put("createdAt", p.getCreatedAt());
+        return result;
     }
 
     @GetMapping("/{id}/answer")

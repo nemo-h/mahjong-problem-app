@@ -3,6 +3,16 @@
   <p><strong>問題文:</strong> {{ p.questionText }}</p>
   <p><strong>作成日時:</strong> {{ p.createdAt }}</p>
 
+  <p *ngIf="p.doraTile"><strong>ドラ</strong></p>
+
+<div *ngIf="p.doraTile" class="tile-row">
+  <img
+    [src]="'assets/tiles/' + p.doraTile + '.png'"
+    [alt]="p.doraTile"
+    class="tile-image"
+  >
+</div>
+
   <p><strong>手牌</strong></p>
 
 

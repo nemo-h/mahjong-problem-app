@@ -30,6 +30,7 @@ export class ProblemCreateComponent {
   questionText = '';
   tehai: string[] = [];
   answerTile = '';
+  doraTile = '';
   explanation = '';
 
   errorMessage = signal<string | null>(null);
@@ -56,11 +57,16 @@ export class ProblemCreateComponent {
     this.answerTile = this.answerTile === code ? '' : code;
   }
 
+  selectDora(code: string): void {
+    this.doraTile = this.doraTile === code ? '' : code;
+  }
+
   createProblem(): void {
     const request = {
       questionText: this.questionText,
       tehai: this.tehai,
       answerTile: this.answerTile,
+      doraTile: this.doraTile,
       explanation: this.explanation
     };
 

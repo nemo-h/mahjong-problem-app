@@ -18,6 +18,8 @@ public class Problem {
 
     private String answerTile;
 
+    private String doraTile;
+
     @Column(columnDefinition = "TEXT")
     private String explanation;
 
@@ -35,6 +37,9 @@ public class Problem {
 
     public String getAnswerTile() { return answerTile; }
     public void setAnswerTile(String answerTile) { this.answerTile = answerTile; }
+
+    public String getDoraTile() { return doraTile; }
+    public void setDoraTile(String doraTile) { this.doraTile = doraTile; }
 
     public String getExplanation() { return explanation; }
     public void setExplanation(String explanation) { this.explanation = explanation; }

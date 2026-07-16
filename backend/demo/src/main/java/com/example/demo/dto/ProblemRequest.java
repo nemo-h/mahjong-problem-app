@@ -7,6 +7,7 @@ public class ProblemRequest {
     private String questionText;
     private List<String> tehai;
     private String answerTile;
+    private String doraTile;
     private String explanation;
 
     public ProblemRequest() {}
@@ -20,6 +21,9 @@ public class ProblemRequest {
 
     public String getAnswerTile() { return answerTile; }
     public void setAnswerTile(String answerTile) { this.answerTile = answerTile; }
+
+    public String getDoraTile() { return doraTile; }
+    public void setDoraTile(String doraTile) { this.doraTile = doraTile; }
 
     public String getExplanation() { return explanation; }
     public void setExplanation(String explanation) { this.explanation = explanation; }

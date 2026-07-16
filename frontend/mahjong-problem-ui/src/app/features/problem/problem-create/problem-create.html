@@ -28,6 +28,27 @@
 <br>
 
 <div>
+  <label>ドラ表示牌を選択</label>
+  <div *ngFor="let group of tileGroups" class="tile-palette-row">
+    <button
+      type="button"
+      *ngFor="let code of group.tiles"
+      class="tile-btn"
+      (click)="selectDora(code)"
+    >
+      <img
+        [src]="'assets/tiles/' + code + '.png'"
+        [alt]="code"
+        class="tile-image"
+        [class.tile-selected-dora]="doraTile === code"
+      >
+    </button>
+  </div>
+</div>
+
+<br>
+
+<div>
   <label>手牌（クリックで正解牌を指定）</label>
   <div class="tehai-row">
     <div *ngFor="let code of tehai; let i = index" class="tehai-chip">
