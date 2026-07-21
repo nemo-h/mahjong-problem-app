@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ProblemService } from '../../../core/services/problem';
+import { SourceService } from '../../../core/services/source';
 
 interface TileGroup {
   suit: string;
@@ -23,22 +24,37 @@ const TILE_GROUPS: TileGroup[] = [
   templateUrl: './problem-create.html',
   styleUrl: './problem-create.css'
 })
-export class ProblemCreateComponent {
+export class ProblemCreateComponent implements OnInit {
 
   tileGroups = TILE_GROUPS;
+  sources = signal<any[]>([]);
 
   questionText = '';
   tehai: string[] = [];
   answerTile = '';
   doraTile = '';
+  sourceId: number | null = null;
+  sourceNumber: number | null = null;
   explanation = '';
 
   errorMessage = signal<string | null>(null);
 
   constructor(
     private problemService: ProblemService,
+    private sourceService: SourceService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.sourceService.getSources().subscribe({
+      next: (sources) => {
+        this.sources.set(sources);
+      },
+      error: (error) => {
+        console.error('引用元取得失敗', error);
+      }
+    });
+  }
 
   addTile(code: string): void {
     this.tehai.push(code);
@@ -67,6 +83,8 @@ export class ProblemCreateComponent {
       tehai: this.tehai,
       answerTile: this.answerTile,
       doraTile: this.doraTile,
+      sourceId: this.sourceId,
+      sourceNumber: this.sourceNumber,
       explanation: this.explanation
     };
 

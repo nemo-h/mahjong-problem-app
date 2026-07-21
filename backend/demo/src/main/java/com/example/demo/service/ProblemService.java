@@ -27,6 +27,8 @@ public class ProblemService {
         problem.setTehaiJson(objectMapper.writeValueAsString(request.getTehai()));
         problem.setAnswerTile(request.getAnswerTile());
         problem.setDoraTile(request.getDoraTile());
+        problem.setSourceId(request.getSourceId());
+        problem.setSourceNumber(request.getSourceNumber());
         problem.setExplanation(request.getExplanation());
         problem.setCreatedAt(LocalDateTime.now());
 

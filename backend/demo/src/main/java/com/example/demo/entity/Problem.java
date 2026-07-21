@@ -20,6 +20,10 @@ public class Problem {
 
     private String doraTile;
 
+    private Long sourceId;
+
+    private Integer sourceNumber;
+
     @Column(columnDefinition = "TEXT")
     private String explanation;
 
@@ -40,6 +44,12 @@ public class Problem {
 
     public String getDoraTile() { return doraTile; }
     public void setDoraTile(String doraTile) { this.doraTile = doraTile; }
+
+    public Long getSourceId() { return sourceId; }
+    public void setSourceId(Long sourceId) { this.sourceId = sourceId; }
+
+    public Integer getSourceNumber() { return sourceNumber; }
+    public void setSourceNumber(Integer sourceNumber) { this.sourceNumber = sourceNumber; }
 
     public String getExplanation() { return explanation; }
     public void setExplanation(String explanation) { this.explanation = explanation; }

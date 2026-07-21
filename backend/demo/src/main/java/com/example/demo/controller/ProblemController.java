@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.*;
 import com.example.demo.entity.Problem;
+import com.example.demo.entity.Source;
 import com.example.demo.service.ProblemService;
+import com.example.demo.service.SourceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +16,12 @@ import java.util.*;
 public class ProblemController {
 
     private final ProblemService service;
+    private final SourceService sourceService;
     private final ObjectMapper objectMapper;
 
-    public ProblemController(ProblemService service, ObjectMapper objectMapper) {
+    public ProblemController(ProblemService service, SourceService sourceService, ObjectMapper objectMapper) {
         this.service = service;
+        this.sourceService = sourceService;
         this.objectMapper = objectMapper;
     }
 
@@ -57,6 +61,16 @@ public class ProblemController {
         result.put("tehai", tehai);
         result.put("doraTile", p.getDoraTile());
         result.put("createdAt", p.getCreatedAt());
+
+        if (p.getSourceId() != null) {
+            Source source = sourceService.getSource(p.getSourceId());
+            if (source != null) {
+                result.put("sourceName", source.getName());
+                result.put("sourceAuthor", source.getAuthor());
+            }
+        }
+        result.put("sourceNumber", p.getSourceNumber());
+
         return result;
     }
 

@@ -8,6 +8,8 @@ public class ProblemRequest {
     private List<String> tehai;
     private String answerTile;
     private String doraTile;
+    private Long sourceId;
+    private Integer sourceNumber;
     private String explanation;
 
     public ProblemRequest() {}
@@ -24,6 +26,12 @@ public class ProblemRequest {
 
     public String getDoraTile() { return doraTile; }
     public void setDoraTile(String doraTile) { this.doraTile = doraTile; }
+
+    public Long getSourceId() { return sourceId; }
+    public void setSourceId(Long sourceId) { this.sourceId = sourceId; }
+
+    public Integer getSourceNumber() { return sourceNumber; }
+    public void setSourceNumber(Integer sourceNumber) { this.sourceNumber = sourceNumber; }
 
     public String getExplanation() { return explanation; }
     public void setExplanation(String explanation) { this.explanation = explanation; }

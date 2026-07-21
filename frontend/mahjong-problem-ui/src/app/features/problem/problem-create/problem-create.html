@@ -12,6 +12,21 @@
 <br>
 
 <div>
+  <label>引用元</label><br>
+  <select [(ngModel)]="sourceId">
+    <option [ngValue]="null">未選択</option>
+    <option *ngFor="let source of sources()" [ngValue]="source.id">
+      {{ source.name }}<ng-container *ngIf="source.author">（{{ source.author }}）</ng-container>
+    </option>
+  </select>
+  <br>
+  <label>第何問目</label><br>
+  <input type="number" [(ngModel)]="sourceNumber" min="1">
+</div>
+
+<br>
+
+<div>
   <label>牌を選択</label>
   <div *ngFor="let group of tileGroups" class="tile-palette-row">
     <button
