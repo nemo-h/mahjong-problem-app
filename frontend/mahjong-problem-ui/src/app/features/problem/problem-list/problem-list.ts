@@ -17,16 +17,11 @@ export class ProblemListComponent implements OnInit {
   constructor(private problemService: ProblemService) {}
 
   ngOnInit(): void {
-    console.log('一覧画面 ngOnInit 実行');
-
     this.problemService.getProblems().subscribe({
       next: (data) => {
-        console.log('一覧データ取得成功', data);
         this.problems.set(data);
-        console.log('problems代入後', this.problems());
       },
-      error: (error) => {
-        console.error('一覧取得失敗', error);
+      error: () => {
       }
     });
   }
