@@ -79,6 +79,11 @@ public class ProblemController {
         return service.getAnswer(id);
     }
 
+    @PostMapping("/{id}/answers")
+    public AnswerSubmitResponse submitAnswer(@PathVariable Long id, @RequestBody AnswerSubmitRequest request) {
+        return service.submitAnswer(id, request);
+    }
+
     @DeleteMapping("/{id}")
     public Map<String, String> delete(@PathVariable Long id) {
         service.deleteProblem(id);

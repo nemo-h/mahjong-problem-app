@@ -18,15 +18,19 @@
 </div>
 
   <p><strong>手牌</strong></p>
+  <p class="tile-hint">牌にカーソルを合わせてクリックすると、その牌を切って回答します。</p>
 
-
-<!-- 牌画像表示 -->
+<!-- 牌画像表示（ホバーで選択プレビュー、クリックで回答確定） -->
 <div class="tile-row">
   <img
-    *ngFor="let tile of p.tehai"
+    *ngFor="let tile of p.tehai; let i = index"
     [src]="'assets/tiles/' + tile + '.png'"
     [alt]="tile"
-    class="tile-image"
+    class="tile-image tile-selectable"
+    [class.tile-hover]="hoveredIndex() === i"
+    (mouseenter)="onTileEnter(i)"
+    (mouseleave)="onTileLeave(i)"
+    (click)="onTileClick(tile)"
   >
 </div>
 

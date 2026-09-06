@@ -23,6 +23,10 @@ export class ProblemService {
     return this.http.get<any>(`${this.baseUrl}/${id}/answer`);
   }
 
+  submitAnswer(id: number, request: { selectedTile: string; clientId: string }): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/${id}/answers`, request);
+  }
+
   createProblem(request: any): Observable<any> {
     return this.http.post<any>(this.baseUrl, request);
   }

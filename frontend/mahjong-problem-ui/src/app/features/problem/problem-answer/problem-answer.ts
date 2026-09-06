@@ -14,6 +14,7 @@ export class ProblemAnswerComponent implements OnInit {
 
   answer = signal<any | null>(null);
   problemId = signal<number | null>(null);
+  myResult = signal<{ correct: boolean; selectedTile: string } | null>(null);
 
   explanationParts(text: string): { type: 'text' | 'tile'; value: string }[] {
     return text
@@ -31,17 +32,17 @@ export class ProblemAnswerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('回答画面 ngOnInit 実行');
+    const state = history.state as { correct?: boolean; selectedTile?: string };
+    if (typeof state?.correct === 'boolean' && state.selectedTile) {
+      this.myResult.set({ correct: state.correct, selectedTile: state.selectedTile });
+    }
 
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
       this.problemId.set(id);
 
-      console.log('取得したID:', id);
-
       this.problemService.getAnswer(id).subscribe({
         next: (data) => {
-          console.log('回答データ取得成功', data);
           this.answer.set(data);
         },
         error: (error) => {

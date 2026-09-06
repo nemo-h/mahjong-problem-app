@@ -16,3 +16,27 @@
   height: auto;
   vertical-align: middle;
 }
+
+.result-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.result-correct {
+  background-color: #e6f4ea;
+  color: #1e7e34;
+}
+
+.result-incorrect {
+  background-color: #fdecea;
+  color: #c82333;
+}
+
+.stats-row {
+  display: flex;
+  gap: 16px;
+}

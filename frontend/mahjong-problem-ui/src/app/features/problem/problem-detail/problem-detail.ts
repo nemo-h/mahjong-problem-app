@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProblemService } from '../../../core/services/problem';
+import { getClientId } from '../../../core/util/client-id';
 
 @Component({
   selector: 'app-problem-detail',
@@ -13,6 +14,8 @@ import { ProblemService } from '../../../core/services/problem';
 export class ProblemDetailComponent implements OnInit {
 
   problem = signal<any | null>(null);
+  hoveredIndex = signal<number | null>(null);
+  submitting = signal<boolean>(false);
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +40,36 @@ export class ProblemDetailComponent implements OnInit {
           console.error('詳細取得失敗', error);
         }
       });
+    });
+  }
+
+  onTileEnter(index: number): void {
+    this.hoveredIndex.set(index);
+  }
+
+  onTileLeave(index: number): void {
+    if (this.hoveredIndex() === index) {
+      this.hoveredIndex.set(null);
+    }
+  }
+
+  onTileClick(tile: string): void {
+    const p = this.problem();
+    if (!p || this.submitting()) return;
+
+    this.submitting.set(true);
+    const clientId = getClientId();
+
+    this.problemService.submitAnswer(p.id, { selectedTile: tile, clientId }).subscribe({
+      next: (result) => {
+        this.router.navigate(['/problems', p.id, 'answer'], {
+          state: { correct: result.correct, selectedTile: tile }
+        });
+      },
+      error: (error) => {
+        console.error('回答送信失敗', error);
+        this.submitting.set(false);
+      }
     });
   }
 

@@ -9,3 +9,18 @@
   width: 40px;
   height: auto;
 }
+
+.tile-hint {
+  font-size: 0.85em;
+  color: #666;
+}
+
+.tile-selectable {
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.tile-hover {
+  transform: translateY(-8px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

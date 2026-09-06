@@ -1,6 +1,9 @@
 <h2>回答</h2>
 
-<p>デバッグ: {{ answer() | json }}</p>
+<div *ngIf="myResult() as m" class="result-banner" [class.result-correct]="m.correct" [class.result-incorrect]="!m.correct">
+  <strong>{{ m.correct ? '正解！' : '不正解…' }}</strong>
+  <span>あなたの回答: <img [src]="'assets/tiles/' + m.selectedTile + '.png'" [alt]="m.selectedTile" class="tile-image-inline"></span>
+</div>
 
 <div *ngIf="answer() as a">
   <p class="answer-tile-row">
@@ -10,6 +13,10 @@
       [alt]="a.answerTile"
       class="tile-image-inline"
     >
+  </p>
+  <p class="stats-row">
+    <strong>回答数:</strong> {{ a.answerCount }}回
+    <strong>正解率:</strong> {{ a.correctRate * 100 | number:'1.0-1' }}%
   </p>
   <p><strong>解説:</strong></p>
   <p class="explanation-text">
