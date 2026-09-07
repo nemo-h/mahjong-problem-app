@@ -6,6 +6,15 @@
 </div>
 
 <div *ngIf="answer() as a">
+  <p><strong>手牌</strong></p>
+  <div class="tile-row">
+    <img
+      *ngFor="let tile of a.tehai"
+      [src]="'assets/tiles/' + tile + '.png'"
+      [alt]="tile"
+      class="tile-image"
+    >
+  </div>
   <p class="answer-tile-row">
     <strong>正解牌:</strong>
     <img

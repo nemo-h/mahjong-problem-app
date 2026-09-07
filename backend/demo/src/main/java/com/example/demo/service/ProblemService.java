@@ -47,16 +47,18 @@ public class ProblemService {
         return repository.findById(id).orElseThrow();
     }
 
-    public AnswerResponse getAnswer(Long id) {
+    public AnswerResponse getAnswer(Long id) throws Exception {
         Problem p = getProblem(id);
+        List<String> tehai = objectMapper.readValue(p.getTehaiJson(), List.class);
         long answerCount = answerLogRepository.countByProblemId(id);
         long correctCount = answerLogRepository.countByProblemIdAndCorrectTrue(id);
         double correctRate = answerCount == 0 ? 0.0 : (double) correctCount / answerCount;
-        return new AnswerResponse(p.getAnswerTile(), p.getExplanation(), answerCount, correctRate);
+        return new AnswerResponse(tehai, p.getAnswerTile(), p.getExplanation(), answerCount, correctRate);
     }
 
-    public AnswerSubmitResponse submitAnswer(Long id, AnswerSubmitRequest request) {
+    public AnswerSubmitResponse submitAnswer(Long id, AnswerSubmitRequest request) throws Exception {
         Problem p = getProblem(id);
+        List<String> tehai = objectMapper.readValue(p.getTehaiJson(), List.class);
         boolean correct = p.getAnswerTile().equals(request.getSelectedTile());
 
         AnswerLog log = new AnswerLog();
@@ -71,7 +73,7 @@ public class ProblemService {
         long correctCount = answerLogRepository.countByProblemIdAndCorrectTrue(id);
         double correctRate = (double) correctCount / answerCount;
 
-        return new AnswerSubmitResponse(correct, p.getAnswerTile(), p.getExplanation(), answerCount, correctRate);
+        return new AnswerSubmitResponse(correct, tehai, p.getAnswerTile(), p.getExplanation(), answerCount, correctRate);
     }
 
     public void deleteProblem(Long id) {

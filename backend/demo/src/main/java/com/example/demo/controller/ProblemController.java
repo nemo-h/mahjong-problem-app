@@ -75,12 +75,12 @@ public class ProblemController {
     }
 
     @GetMapping("/{id}/answer")
-    public AnswerResponse getAnswer(@PathVariable Long id) {
+    public AnswerResponse getAnswer(@PathVariable Long id) throws Exception {
         return service.getAnswer(id);
     }
 
     @PostMapping("/{id}/answers")
-    public AnswerSubmitResponse submitAnswer(@PathVariable Long id, @RequestBody AnswerSubmitRequest request) {
+    public AnswerSubmitResponse submitAnswer(@PathVariable Long id, @RequestBody AnswerSubmitRequest request) throws Exception {
         return service.submitAnswer(id, request);
     }
 
