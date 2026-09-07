@@ -1,7 +1,5 @@
 <div *ngIf="problem() as p">
-  <p><strong>ID:</strong> {{ p.id }}</p>
   <p><strong>問題文:</strong> {{ p.questionText }}</p>
-  <p><strong>作成日時:</strong> {{ p.createdAt }}</p>
 
   <p *ngIf="p.sourceName">
     <strong>引用元:</strong> {{ p.sourceName }}<ng-container *ngIf="p.sourceAuthor">（{{ p.sourceAuthor }}）</ng-container><ng-container *ngIf="p.sourceNumber"> 第{{ p.sourceNumber }}問</ng-container>
