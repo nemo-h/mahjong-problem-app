@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.*;
 import com.example.demo.entity.Problem;
 import com.example.demo.entity.Source;
+import com.example.demo.repository.AnswerLogRepository;
 import com.example.demo.service.ProblemService;
 import com.example.demo.service.SourceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,11 +18,13 @@ public class ProblemController {
 
     private final ProblemService service;
     private final SourceService sourceService;
+    private final AnswerLogRepository answerLogRepository;
     private final ObjectMapper objectMapper;
 
-    public ProblemController(ProblemService service, SourceService sourceService, ObjectMapper objectMapper) {
+    public ProblemController(ProblemService service, SourceService sourceService, AnswerLogRepository answerLogRepository, ObjectMapper objectMapper) {
         this.service = service;
         this.sourceService = sourceService;
+        this.answerLogRepository = answerLogRepository;
         this.objectMapper = objectMapper;
     }
 
@@ -34,16 +37,33 @@ public class ProblemController {
 
     
     @GetMapping
-    public List<Map<String, Object>> getAll() {
+    public List<Map<String, Object>> getAll() throws Exception {
         List<Problem> list = service.getProblems();
         List<Map<String, Object>> result = new ArrayList<>();
 
         for (Problem p : list) {
-            result.add(Map.of(
-                    "id", p.getId(),
-                    "questionText", p.getQuestionText(),
-                    "createdAt", p.getCreatedAt()
-            ));
+            List<String> tehai = objectMapper.readValue(p.getTehaiJson(), List.class);
+            Map<String, Object> row = new HashMap<>();
+            row.put("id", p.getId());
+            row.put("questionText", p.getQuestionText());
+            row.put("tehai", tehai);
+            row.put("createdAt", p.getCreatedAt());
+
+            if (p.getSourceId() != null) {
+                Source source = sourceService.getSource(p.getSourceId());
+                if (source != null) {
+                    row.put("sourceName", source.getName());
+                    row.put("sourceAuthor", source.getAuthor());
+                }
+            }
+            row.put("sourceNumber", p.getSourceNumber());
+
+            long answerCount = answerLogRepository.countByProblemId(p.getId());
+            long correctCount = answerLogRepository.countByProblemIdAndCorrectTrue(p.getId());
+            row.put("answerCount", answerCount);
+            row.put("correctRate", answerCount == 0 ? 0.0 : (double) correctCount / answerCount);
+
+            result.add(row);
         }
         return result;
     }

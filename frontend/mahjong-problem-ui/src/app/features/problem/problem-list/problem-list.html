@@ -4,10 +4,26 @@
   <a [routerLink]="['/problems/new']">新規登録</a>
 </p>
 
-<ul>
-  <li *ngFor="let p of problems()">
-    <a [routerLink]="['/problems', p.id]">
-      {{ p.id }} - {{ p.questionText }} - {{ p.createdAt }}
+<ul class="problem-list">
+  <li *ngFor="let p of problems()" class="problem-card">
+    <a [routerLink]="['/problems', p.id]" class="problem-card-link">
+      <div class="problem-card-header">
+        <span class="problem-id">ID: {{ p.id }}</span>
+        <span class="problem-stats">
+          <span *ngIf="p.sourceName">{{ p.sourceName }}<ng-container *ngIf="p.sourceAuthor">（{{ p.sourceAuthor }}）</ng-container><ng-container *ngIf="p.sourceNumber"> 第{{ p.sourceNumber }}問</ng-container></span>
+          <span>回答数: {{ p.answerCount }}回</span>
+          <span>正解率: {{ p.correctRate * 100 | number:'1.0-1' }}%</span>
+        </span>
+      </div>
+      <p class="problem-question-text">{{ p.questionText }}</p>
+      <div class="tile-row">
+        <img
+          *ngFor="let tile of p.tehai"
+          [src]="'assets/tiles/' + tile + '.png'"
+          [alt]="tile"
+          class="tile-image"
+        >
+      </div>
     </a>
   </li>
 </ul>
