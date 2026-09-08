@@ -1,12 +1,13 @@
+<div class="form-container">
 <h2>問題登録</h2>
 
-<div *ngIf="errorMessage()" style="color: red;">
+<div *ngIf="errorMessage()" class="error-message">
   {{ errorMessage() }}
 </div>
 
 <div>
   <label>問題文</label><br>
-  <input type="text" [(ngModel)]="questionText">
+  <input type="text" [(ngModel)]="questionText" class="explanation-width">
 </div>
 
 <br>
@@ -19,7 +20,7 @@
       {{ source.name }}<ng-container *ngIf="source.author">（{{ source.author }}）</ng-container>
     </option>
   </select>
-  <br>
+  <div class="field-gap"></div>
   <label>第何問目</label><br>
   <input type="number" [(ngModel)]="sourceNumber" min="1">
 </div>
@@ -83,13 +84,16 @@
 
 <div>
   <label>解説</label><br>
-  <textarea [(ngModel)]="explanation"></textarea>
+  <textarea [(ngModel)]="explanation" class="explanation-textarea" rows="10"></textarea>
 </div>
 
 <br>
 
-<button type="button" (click)="createProblem()">登録</button>
+<div class="submit-row">
+  <button type="button" class="submit-btn" (click)="createProblem()">登録</button>
+</div>
 
 <p>
   <a [routerLink]="['/problems']">一覧へ戻る</a>
 </p>
+</div>
