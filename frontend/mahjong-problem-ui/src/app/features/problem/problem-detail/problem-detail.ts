@@ -43,6 +43,17 @@ export class ProblemDetailComponent implements OnInit {
     });
   }
 
+  private readonly baLabels: Record<string, string> = { east: '東場', south: '南場' };
+  private readonly kazeLabels: Record<string, string> = { east: '東家', south: '南家', west: '西家', north: '北家' };
+
+  baLabel(ba: string): string {
+    return this.baLabels[ba] ?? ba;
+  }
+
+  kazeLabel(kaze: string): string {
+    return this.kazeLabels[kaze] ?? kaze;
+  }
+
   onTileEnter(index: number): void {
     this.hoveredIndex.set(index);
   }

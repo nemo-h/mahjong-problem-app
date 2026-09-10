@@ -24,6 +24,12 @@ public class Problem {
 
     private Integer sourceNumber;
 
+    private String ba;
+
+    private String kaze;
+
+    private Integer jun;
+
     @Column(columnDefinition = "TEXT")
     private String explanation;
 
@@ -50,6 +56,15 @@ public class Problem {
 
     public Integer getSourceNumber() { return sourceNumber; }
     public void setSourceNumber(Integer sourceNumber) { this.sourceNumber = sourceNumber; }
+
+    public String getBa() { return ba; }
+    public void setBa(String ba) { this.ba = ba; }
+
+    public String getKaze() { return kaze; }
+    public void setKaze(String kaze) { this.kaze = kaze; }
+
+    public Integer getJun() { return jun; }
+    public void setJun(Integer jun) { this.jun = jun; }
 
     public String getExplanation() { return explanation; }
     public void setExplanation(String explanation) { this.explanation = explanation; }

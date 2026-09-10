@@ -28,6 +28,29 @@
 <br>
 
 <div>
+  <label>場</label><br>
+  <select [(ngModel)]="ba">
+    <option [ngValue]="null">未選択</option>
+    <option value="east">東場</option>
+    <option value="south">南場</option>
+  </select>
+  <div class="field-gap"></div>
+  <label>家</label><br>
+  <select [(ngModel)]="kaze">
+    <option [ngValue]="null">未選択</option>
+    <option value="east">東家</option>
+    <option value="south">南家</option>
+    <option value="west">西家</option>
+    <option value="north">北家</option>
+  </select>
+  <div class="field-gap"></div>
+  <label>巡目</label><br>
+  <input type="number" [(ngModel)]="jun" min="1">
+</div>
+
+<br>
+
+<div>
   <label>牌を選択</label>
   <div *ngFor="let group of tileGroups" class="tile-palette-row">
     <button

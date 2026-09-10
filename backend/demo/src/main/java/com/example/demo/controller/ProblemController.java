@@ -80,6 +80,9 @@ public class ProblemController {
         result.put("questionText", p.getQuestionText());
         result.put("tehai", tehai);
         result.put("doraTile", p.getDoraTile());
+        result.put("ba", p.getBa());
+        result.put("kaze", p.getKaze());
+        result.put("jun", p.getJun());
         result.put("createdAt", p.getCreatedAt());
 
         if (p.getSourceId() != null) {

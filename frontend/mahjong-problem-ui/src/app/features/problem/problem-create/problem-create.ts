@@ -35,6 +35,9 @@ export class ProblemCreateComponent implements OnInit {
   doraTile = '';
   sourceId: number | null = null;
   sourceNumber: number | null = null;
+  ba: string | null = null;
+  kaze: string | null = null;
+  jun: number | null = null;
   explanation = '';
 
   errorMessage = signal<string | null>(null);
@@ -85,6 +88,9 @@ export class ProblemCreateComponent implements OnInit {
       doraTile: this.doraTile,
       sourceId: this.sourceId,
       sourceNumber: this.sourceNumber,
+      ba: this.ba,
+      kaze: this.kaze,
+      jun: this.jun,
       explanation: this.explanation
     };
 

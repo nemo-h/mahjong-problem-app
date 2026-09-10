@@ -33,6 +33,9 @@ public class ProblemService {
         problem.setDoraTile(request.getDoraTile());
         problem.setSourceId(request.getSourceId());
         problem.setSourceNumber(request.getSourceNumber());
+        problem.setBa(request.getBa());
+        problem.setKaze(request.getKaze());
+        problem.setJun(request.getJun());
         problem.setExplanation(request.getExplanation());
         problem.setCreatedAt(LocalDateTime.now());
 

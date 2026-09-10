@@ -5,6 +5,13 @@
     <strong>引用元:</strong> {{ p.sourceName }}<ng-container *ngIf="p.sourceAuthor">（{{ p.sourceAuthor }}）</ng-container><ng-container *ngIf="p.sourceNumber"> 第{{ p.sourceNumber }}問</ng-container>
   </p>
 
+  <p *ngIf="p.ba || p.kaze || p.jun">
+    <strong>場況:</strong>
+    <ng-container *ngIf="p.ba">{{ baLabel(p.ba) }}</ng-container>
+    <ng-container *ngIf="p.kaze"> {{ kazeLabel(p.kaze) }}</ng-container>
+    <ng-container *ngIf="p.jun"> {{ p.jun }}巡目</ng-container>
+  </p>
+
   <p *ngIf="p.doraTile"><strong>ドラ</strong></p>
 
 <div *ngIf="p.doraTile" class="tile-row">
