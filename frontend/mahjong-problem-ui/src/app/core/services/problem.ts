@@ -31,6 +31,10 @@ export class ProblemService {
     return this.http.post<any>(this.baseUrl, request);
   }
 
+  updateProblem(id: number, request: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/${id}`, request);
+  }
+
   deleteProblem(id: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }

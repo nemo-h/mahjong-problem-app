@@ -9,5 +9,6 @@ export const routes: Routes = [
   { path: 'problems', component: ProblemListComponent },
   { path: 'problems/new', component: ProblemCreateComponent },
   { path: 'problems/:id', component: ProblemDetailComponent },
+  { path: 'problems/:id/edit', component: ProblemCreateComponent },
   { path: 'problems/:id/answer', component: ProblemAnswerComponent }
 ];

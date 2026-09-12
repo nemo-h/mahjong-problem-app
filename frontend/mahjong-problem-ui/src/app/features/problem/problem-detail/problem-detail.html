@@ -45,6 +45,10 @@
     <a [routerLink]="['/problems', p.id, 'answer']">回答を見る</a>
   </p>
 
+  <a [routerLink]="['/problems', p.id, 'edit']">
+    <button type="button">編集</button>
+  </a>
+
   <button type="button" (click)="deleteProblem()">
     削除
   </button>

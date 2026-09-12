@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProblemService } from '../../../core/services/problem';
 import { SourceService } from '../../../core/services/source';
 
@@ -41,11 +41,17 @@ export class ProblemCreateComponent implements OnInit {
   explanation = '';
 
   errorMessage = signal<string | null>(null);
+  editingId: number | null = null;
+
+  get isEditMode(): boolean {
+    return this.editingId !== null;
+  }
 
   constructor(
     private problemService: ProblemService,
     private sourceService: SourceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +61,41 @@ export class ProblemCreateComponent implements OnInit {
       },
       error: (error) => {
         console.error('引用元取得失敗', error);
+      }
+    });
+
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam) {
+      this.editingId = Number(idParam);
+      this.loadProblemForEdit(this.editingId);
+    }
+  }
+
+  private loadProblemForEdit(id: number): void {
+    this.problemService.getProblem(id).subscribe({
+      next: (problem) => {
+        this.questionText = problem.questionText;
+        this.tehai = problem.tehai ?? [];
+        this.doraTile = problem.doraTile ?? '';
+        this.sourceId = problem.sourceId ?? null;
+        this.sourceNumber = problem.sourceNumber ?? null;
+        this.ba = problem.ba ?? null;
+        this.kaze = problem.kaze ?? null;
+        this.jun = problem.jun ?? null;
+      },
+      error: (error) => {
+        console.error('編集対象の問題取得失敗', error);
+        this.errorMessage.set('問題の取得に失敗しました');
+      }
+    });
+
+    this.problemService.getAnswer(id).subscribe({
+      next: (answer) => {
+        this.answerTile = answer.answerTile ?? '';
+        this.explanation = answer.explanation ?? '';
+      },
+      error: (error) => {
+        console.error('編集対象の回答取得失敗', error);
       }
     });
   }
@@ -94,11 +135,21 @@ export class ProblemCreateComponent implements OnInit {
       explanation: this.explanation
     };
 
-    console.log('登録リクエスト', request);
+    if (this.isEditMode) {
+      this.problemService.updateProblem(this.editingId!, request).subscribe({
+        next: () => {
+          this.router.navigate(['/problems', this.editingId]);
+        },
+        error: (error) => {
+          console.error('更新失敗', error);
+          this.errorMessage.set('問題更新に失敗しました');
+        }
+      });
+      return;
+    }
 
     this.problemService.createProblem(request).subscribe({
-      next: (response) => {
-        console.log('登録成功', response);
+      next: () => {
         this.router.navigate(['/problems']);
       },
       error: (error) => {

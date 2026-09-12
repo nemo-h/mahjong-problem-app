@@ -85,6 +85,7 @@ public class ProblemController {
         result.put("jun", p.getJun());
         result.put("createdAt", p.getCreatedAt());
 
+        result.put("sourceId", p.getSourceId());
         if (p.getSourceId() != null) {
             Source source = sourceService.getSource(p.getSourceId());
             if (source != null) {
@@ -95,6 +96,12 @@ public class ProblemController {
         result.put("sourceNumber", p.getSourceNumber());
 
         return result;
+    }
+
+    @PutMapping("/{id}")
+    public Map<String, String> update(@PathVariable Long id, @RequestBody ProblemRequest request) throws Exception {
+        service.updateProblem(id, request);
+        return Map.of("message", "problem updated");
     }
 
     @GetMapping("/{id}/answer")

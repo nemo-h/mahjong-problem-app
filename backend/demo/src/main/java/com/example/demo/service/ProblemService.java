@@ -42,6 +42,22 @@ public class ProblemService {
         return repository.save(problem).getId();
     }
 
+    public void updateProblem(Long id, ProblemRequest request) throws Exception {
+        Problem problem = getProblem(id);
+        problem.setQuestionText(request.getQuestionText());
+        problem.setTehaiJson(objectMapper.writeValueAsString(request.getTehai()));
+        problem.setAnswerTile(request.getAnswerTile());
+        problem.setDoraTile(request.getDoraTile());
+        problem.setSourceId(request.getSourceId());
+        problem.setSourceNumber(request.getSourceNumber());
+        problem.setBa(request.getBa());
+        problem.setKaze(request.getKaze());
+        problem.setJun(request.getJun());
+        problem.setExplanation(request.getExplanation());
+
+        repository.save(problem);
+    }
+
     public List<Problem> getProblems() {
         return repository.findAll();
     }

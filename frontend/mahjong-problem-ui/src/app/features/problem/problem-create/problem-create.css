@@ -85,15 +85,15 @@ button:hover {
 }
 
 .tile-image {
-  width: 40px;
+  width: 30px;
   height: auto;
   display: block;
 }
 
 .tehai-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-wrap: nowrap;
+  gap: 4px;
   align-items: center;
 }
 

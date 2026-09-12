@@ -1,5 +1,5 @@
 <div class="form-container">
-<h2>問題登録</h2>
+<h2>{{ isEditMode ? '問題編集' : '問題登録' }}</h2>
 
 <div *ngIf="errorMessage()" class="error-message">
   {{ errorMessage() }}
@@ -113,10 +113,13 @@
 <br>
 
 <div class="submit-row">
-  <button type="button" class="submit-btn" (click)="createProblem()">登録</button>
+  <button type="button" class="submit-btn" (click)="createProblem()">{{ isEditMode ? '更新' : '登録' }}</button>
 </div>
 
-<p>
+<p *ngIf="isEditMode">
+  <a [routerLink]="['/problems', editingId]">問題詳細へ戻る</a>
+</p>
+<p *ngIf="!isEditMode">
   <a [routerLink]="['/problems']">一覧へ戻る</a>
 </p>
 </div>
