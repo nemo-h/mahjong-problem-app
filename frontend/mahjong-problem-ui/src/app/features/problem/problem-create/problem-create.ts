@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -51,7 +51,8 @@ export class ProblemCreateComponent implements OnInit {
     private problemService: ProblemService,
     private sourceService: SourceService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +83,7 @@ export class ProblemCreateComponent implements OnInit {
         this.ba = problem.ba ?? null;
         this.kaze = problem.kaze ?? null;
         this.jun = problem.jun ?? null;
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('編集対象の問題取得失敗', error);
@@ -93,6 +95,7 @@ export class ProblemCreateComponent implements OnInit {
       next: (answer) => {
         this.answerTile = answer.answerTile ?? '';
         this.explanation = answer.explanation ?? '';
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('編集対象の回答取得失敗', error);
