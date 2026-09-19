@@ -51,23 +51,7 @@
 <br>
 
 <div>
-  <label>牌を選択</label>
-  <div *ngFor="let group of tileGroups" class="tile-palette-row">
-    <button
-      type="button"
-      *ngFor="let code of group.tiles"
-      class="tile-btn"
-      (click)="addTile(code)"
-    >
-      <img [src]="'assets/tiles/' + code + '.png'" [alt]="code" class="tile-image">
-    </button>
-  </div>
-</div>
-
-<br>
-
-<div>
-  <label>ドラ表示牌を選択</label>
+  <label>ドラを選択</label>
   <div *ngFor="let group of tileGroups" class="tile-palette-row">
     <button
       type="button"
@@ -81,6 +65,22 @@
         class="tile-image"
         [class.tile-selected-dora]="doraTile === code"
       >
+    </button>
+  </div>
+</div>
+
+<br>
+
+<div>
+  <label>牌を選択</label>
+  <div *ngFor="let group of tileGroups" class="tile-palette-row">
+    <button
+      type="button"
+      *ngFor="let code of group.tiles"
+      class="tile-btn"
+      (click)="addTile(code)"
+    >
+      <img [src]="'assets/tiles/' + code + '.png'" [alt]="code" class="tile-image">
     </button>
   </div>
 </div>
