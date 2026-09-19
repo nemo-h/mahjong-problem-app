@@ -72,7 +72,7 @@ public class ProblemService {
         long answerCount = answerLogRepository.countByProblemId(id);
         long correctCount = answerLogRepository.countByProblemIdAndCorrectTrue(id);
         double correctRate = answerCount == 0 ? 0.0 : (double) correctCount / answerCount;
-        return new AnswerResponse(tehai, p.getAnswerTile(), p.getExplanation(), answerCount, correctRate);
+        return new AnswerResponse(tehai, p.getAnswerTile(), p.getDoraTile(), p.getExplanation(), answerCount, correctRate);
     }
 
     public AnswerSubmitResponse submitAnswer(Long id, AnswerSubmitRequest request) throws Exception {
@@ -92,7 +92,7 @@ public class ProblemService {
         long correctCount = answerLogRepository.countByProblemIdAndCorrectTrue(id);
         double correctRate = (double) correctCount / answerCount;
 
-        return new AnswerSubmitResponse(correct, tehai, p.getAnswerTile(), p.getExplanation(), answerCount, correctRate);
+        return new AnswerSubmitResponse(correct, tehai, p.getAnswerTile(), p.getDoraTile(), p.getExplanation(), answerCount, correctRate);
     }
 
     public void deleteProblem(Long id) {

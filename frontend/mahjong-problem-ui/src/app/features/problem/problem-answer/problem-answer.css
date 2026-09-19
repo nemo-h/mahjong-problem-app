@@ -1,3 +1,25 @@
+:host {
+  display: block;
+  background-color: #1e1e1e;
+  color: #eee;
+  min-height: 100vh;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+:host a {
+  color: #7db4ff;
+}
+
+.answer-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.link-row {
+  text-align: center;
+}
+
 .answer-tile-row {
   display: flex;
   align-items: center;
@@ -8,11 +30,11 @@
   display: flex;
   gap: 4px;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .tile-image {
-  width: 40px;
+  width: 37px;
   height: auto;
 }
 
@@ -39,13 +61,13 @@
 }
 
 .result-correct {
-  background-color: #e6f4ea;
-  color: #1e7e34;
+  background-color: #1e3a24;
+  color: #6fd88a;
 }
 
 .result-incorrect {
-  background-color: #fdecea;
-  color: #c82333;
+  background-color: #3a1e1e;
+  color: #ff8a8a;
 }
 
 .stats-row {

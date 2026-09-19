@@ -1,3 +1,4 @@
+<div class="answer-container">
 <h2>回答</h2>
 
 <div *ngIf="myResult() as m" class="result-banner" [class.result-correct]="m.correct" [class.result-incorrect]="!m.correct">
@@ -6,6 +7,17 @@
 </div>
 
 <div *ngIf="answer() as a">
+  <ng-container *ngIf="a.doraTile">
+    <p><strong>ドラ</strong></p>
+    <div class="tile-row">
+      <img
+        [src]="'assets/tiles/' + a.doraTile + '.png'"
+        [alt]="a.doraTile"
+        class="tile-image"
+      >
+    </div>
+  </ng-container>
+
   <p><strong>手牌</strong></p>
   <div class="tile-row">
     <img
@@ -40,11 +52,12 @@
     </ng-container>
   </p>
 
-  <p>
+  <p class="link-row">
     <a [routerLink]="['/problems', problemId()]">問題詳細へ戻る</a>
   </p>
 
-  <p>
+  <p class="link-row">
     <a [routerLink]="['/problems']">一覧へ戻る</a>
   </p>
+</div>
 </div>
