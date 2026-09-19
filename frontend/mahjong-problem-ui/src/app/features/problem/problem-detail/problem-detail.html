@@ -1,4 +1,4 @@
-<div *ngIf="problem() as p">
+<div *ngIf="problem() as p" class="detail-container">
   <p><strong>問題文:</strong> {{ p.questionText }}</p>
 
   <p *ngIf="p.sourceName">
@@ -41,19 +41,21 @@
 
 
 
-  <p>
+  <p class="link-row">
     <a [routerLink]="['/problems', p.id, 'answer']">回答を見る</a>
   </p>
 
-  <a [routerLink]="['/problems', p.id, 'edit']">
-    <button type="button">編集</button>
-  </a>
+  <div class="action-row">
+    <a [routerLink]="['/problems', p.id, 'edit']">
+      <button type="button" class="action-btn">編集</button>
+    </a>
 
-  <button type="button" (click)="deleteProblem()">
-    削除
-  </button>
+    <button type="button" class="action-btn" (click)="deleteProblem()">
+      削除
+    </button>
+  </div>
 
-  <p>
+  <p class="link-row">
     <a [routerLink]="['/problems']">一覧へ戻る</a>
   </p>
 </div>

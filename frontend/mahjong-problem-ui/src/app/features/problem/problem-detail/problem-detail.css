@@ -1,18 +1,60 @@
+:host {
+  display: block;
+  background-color: #1e1e1e;
+  color: #eee;
+  min-height: 100vh;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+:host a {
+  color: #7db4ff;
+}
+
+.detail-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.action-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.action-btn {
+  background-color: #2a2a2a;
+  color: #eee;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 8px 28px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  border-color: #7db4ff;
+}
+
+.link-row {
+  text-align: center;
+}
+
 .tile-row {
   display: flex;
   gap: 4px;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .tile-image {
-  width: 40px;
+  width: 37px;
   height: auto;
 }
 
 .tile-hint {
   font-size: 0.85em;
-  color: #666;
+  color: #aaa;
 }
 
 .tile-selectable {
