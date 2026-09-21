@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.SourceRequest;
 import com.example.demo.entity.Source;
+import com.example.demo.repository.ProblemRepository;
 import com.example.demo.repository.SourceRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ import java.util.List;
 public class SourceService {
 
     private final SourceRepository repository;
+    private final ProblemRepository problemRepository;
 
-    public SourceService(SourceRepository repository) {
+    public SourceService(SourceRepository repository, ProblemRepository problemRepository) {
         this.repository = repository;
+        this.problemRepository = problemRepository;
     }
 
     public Long createSource(SourceRequest request) {
@@ -29,5 +32,10 @@ public class SourceService {
 
     public Source getSource(Long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    public int getNextSourceNumber(Long sourceId) {
+        Integer max = problemRepository.findMaxSourceNumber(sourceId);
+        return (max == null ? 0 : max) + 1;
     }
 }

@@ -19,4 +19,8 @@ export class SourceService {
     return this.http.post<any>(this.baseUrl, request);
   }
 
+  getNextNumber(id: number): Observable<{ nextNumber: number }> {
+    return this.http.get<{ nextNumber: number }>(`${this.baseUrl}/${id}/next-number`);
+  }
+
 }

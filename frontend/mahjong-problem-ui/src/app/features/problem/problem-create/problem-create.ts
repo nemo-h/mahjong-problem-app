@@ -120,6 +120,20 @@ export class ProblemCreateComponent implements OnInit {
     this.answerTile = this.answerTile === code ? '' : code;
   }
 
+  onSourceChange(sourceId: number | null): void {
+    if (sourceId == null) return;
+
+    this.sourceService.getNextNumber(sourceId).subscribe({
+      next: (result) => {
+        this.sourceNumber = result.nextNumber;
+        this.cdr.markForCheck();
+      },
+      error: (error) => {
+        console.error('次の問題番号取得失敗', error);
+      }
+    });
+  }
+
   selectDora(code: string): void {
     this.doraTile = this.doraTile === code ? '' : code;
   }

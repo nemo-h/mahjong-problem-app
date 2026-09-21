@@ -14,7 +14,7 @@
 
 <div>
   <label>引用元</label><br>
-  <select [(ngModel)]="sourceId">
+  <select [(ngModel)]="sourceId" (ngModelChange)="onSourceChange($event)">
     <option [ngValue]="null">未選択</option>
     <option *ngFor="let source of sources()" [ngValue]="source.id">
       {{ source.name }}<ng-container *ngIf="source.author">（{{ source.author }}）</ng-container>

@@ -29,4 +29,9 @@ public class SourceController {
     public List<Source> getAll() {
         return service.getSources();
     }
+
+    @GetMapping("/{id}/next-number")
+    public Map<String, Integer> getNextNumber(@PathVariable Long id) {
+        return Map.of("nextNumber", service.getNextSourceNumber(id));
+    }
 }
