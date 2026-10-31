@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.*;
 import com.example.demo.entity.AnswerLog;
 import com.example.demo.entity.Problem;
+import com.example.demo.entity.Source;
 import com.example.demo.repository.AnswerLogRepository;
 import com.example.demo.repository.ProblemRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,11 +17,13 @@ public class ProblemService {
 
     private final ProblemRepository repository;
     private final AnswerLogRepository answerLogRepository;
+    private final SourceService sourceService;
     private final ObjectMapper objectMapper;
 
-    public ProblemService(ProblemRepository repository, AnswerLogRepository answerLogRepository, ObjectMapper objectMapper) {
+    public ProblemService(ProblemRepository repository, AnswerLogRepository answerLogRepository, SourceService sourceService, ObjectMapper objectMapper) {
         this.repository = repository;
         this.answerLogRepository = answerLogRepository;
+        this.sourceService = sourceService;
         this.objectMapper = objectMapper;
     }
 
@@ -72,7 +75,12 @@ public class ProblemService {
         long answerCount = answerLogRepository.countByProblemId(id);
         long correctCount = answerLogRepository.countByProblemIdAndCorrectTrue(id);
         double correctRate = answerCount == 0 ? 0.0 : (double) correctCount / answerCount;
-        return new AnswerResponse(tehai, p.getAnswerTile(), p.getDoraTile(), p.getExplanation(), answerCount, correctRate);
+
+        Source source = p.getSourceId() != null ? sourceService.getSource(p.getSourceId()) : null;
+        String sourceName = source != null ? source.getName() : null;
+        String sourceAuthor = source != null ? source.getAuthor() : null;
+
+        return new AnswerResponse(tehai, p.getAnswerTile(), p.getDoraTile(), p.getSourceNumber(), sourceName, sourceAuthor, p.getExplanation(), answerCount, correctRate);
     }
 
     public AnswerSubmitResponse submitAnswer(Long id, AnswerSubmitRequest request) throws Exception {
@@ -92,7 +100,11 @@ public class ProblemService {
         long correctCount = answerLogRepository.countByProblemIdAndCorrectTrue(id);
         double correctRate = (double) correctCount / answerCount;
 
-        return new AnswerSubmitResponse(correct, tehai, p.getAnswerTile(), p.getDoraTile(), p.getExplanation(), answerCount, correctRate);
+        Source source = p.getSourceId() != null ? sourceService.getSource(p.getSourceId()) : null;
+        String sourceName = source != null ? source.getName() : null;
+        String sourceAuthor = source != null ? source.getAuthor() : null;
+
+        return new AnswerSubmitResponse(correct, tehai, p.getAnswerTile(), p.getDoraTile(), p.getSourceNumber(), sourceName, sourceAuthor, p.getExplanation(), answerCount, correctRate);
     }
 
     public void deleteProblem(Long id) {

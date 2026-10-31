@@ -7,6 +7,10 @@
 </div>
 
 <div *ngIf="answer() as a">
+  <p *ngIf="a.sourceName || a.sourceNumber">
+    <strong>引用元:</strong> {{ a.sourceName }}<ng-container *ngIf="a.sourceAuthor">（{{ a.sourceAuthor }}）</ng-container><ng-container *ngIf="a.sourceNumber"> 第{{ a.sourceNumber }}問</ng-container>
+  </p>
+
   <ng-container *ngIf="a.doraTile">
     <p><strong>ドラ</strong></p>
     <div class="tile-row">
